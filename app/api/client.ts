@@ -1,7 +1,7 @@
 import { Review } from "@/lib/mockdata";
 
-// const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
-const API_BASE_URL = "http://localhost:8000";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+// const API_BASE_URL = "http://localhost:8000";
 
 // GET / - Health check
 export async function healthCheck() {
