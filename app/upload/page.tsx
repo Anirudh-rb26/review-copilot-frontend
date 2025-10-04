@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Upload, FileJson, CheckCircle2 } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ingestReview } from "../api/client"
-import { toast, ToastContainer } from "react-toastify"
+import { Slide, toast, ToastContainer } from "react-toastify"
 import { useReviews } from "@/contexts/ReviewContext"
 import { Review } from "@/lib/mockdata"
 
@@ -93,22 +93,9 @@ export default function UploadPage() {
         }
     }
 
-    const getSentimentColor = (sentiment: string) => {
-        switch (sentiment) {
-            case "positive":
-                return "bg-chart-3/20 text-chart-3 border-chart-3/30"
-            case "negative":
-                return "bg-chart-4/20 text-chart-4 border-chart-4/30"
-            case "neutral":
-                return "bg-muted text-muted-foreground border-border"
-            default:
-                return "bg-muted text-muted-foreground border-border"
-        }
-    }
-
     return (
         <div className="px-6">
-            <ToastContainer />
+            <ToastContainer position="bottom-center" hideProgressBar={false} theme="dark" transition={Slide} pauseOnFocusLoss draggable closeOnClick />
             <div className="flex flex-col mb-2">
                 <h1 className="text-4xl">Upload Reviews</h1>
                 <h4 className="text-shadow-md mt-1">Import reviews from a JSON file</h4>

@@ -6,6 +6,7 @@ export interface Review {
   text: string;
   sentiment: "positive" | "negative" | "neutral";
   topics: string[];
+  suggested_reply?: string;
 }
 
 export const mockReviews: Review[] = [

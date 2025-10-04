@@ -1,6 +1,7 @@
 import { Review } from "@/lib/mockdata";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+// const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_BASE_URL = "http://localhost:8000";
 
 // GET / - Health check
 export async function healthCheck() {
@@ -43,6 +44,21 @@ export async function getAllReviews(): Promise<Review[]> {
   return response.json();
 }
 
+// GET /similar-reviews/{review_id} - Get similar reviews
+export async function getSimilarReviews(reviewId: string): Promise<Review[]> {
+  const response = await fetch(`${API_BASE_URL}/similar-reviews/${reviewId}`);
+
+  if (!response.ok) {
+    if (response.status === 404) {
+      throw new Error(`Review ${reviewId} not found`);
+    }
+    throw new Error(`Failed to fetch similar reviews: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  return data.similar_reviews || [];
+}
+
 // POST /generate-reply - Generate a reply for a review
 export async function generateReply(reviewId: string) {
   const response = await fetch(`${API_BASE_URL}/generate-reply`, {
@@ -59,6 +75,20 @@ export async function generateReply(reviewId: string) {
   }
 
   return response.json();
+}
+
+export async function fetchReviewDetails(reviewId: string): Promise<Review> {
+  const response = await fetch(`${API_BASE_URL}/review/${reviewId}`);
+
+  if (!response.ok) {
+    if (response.status === 404) {
+      throw new Error(`Review ${reviewId} not found`);
+    }
+    throw new Error(`Failed to fetch review details: ${response.statusText}`);
+  }
+
+  const data: Review = await response.json();
+  return data;
 }
 
 // ============================================
