@@ -64,10 +64,13 @@ export default function Home() {
               variant="outline"
               className="text-black border-none hover:bg-[#181818] hover:text-white transition-colors duration-300"
               onClick={() => {
-                const basereview = uploadedReviews.length > 0 ? uploadedReviews :
-                  (showMockData ? mockReviews : []);
+                // console.log("onClick")
+                const basereview = uploadedReviews.length > 0 ? uploadedReviews : mockReviews;
                 setBaseReview(basereview)
+                // console.log("onClick: setBaseReview");
                 setShowMockData(true)
+                // console.log("onClick: setMockData");
+                // console.log("onClick: end");
               }}>
               Use Mockdata?
             </Button>
